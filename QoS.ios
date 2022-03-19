@@ -1,0 +1,78 @@
+ena
+conf ter
+do copy run start
+
+
+==>SanMiguel
+ip access-list standard 2 
+permit 192.25.20.0 0.0.0.0
+
+class-map RadioRocolaMap
+match access-group 2
+exit
+
+policy-map RadioRocolaPolicy
+class RadioRocolaMap
+bandwidth 10
+set precedence network
+exit
+
+int gi0/1
+service-policy output RadioRocolaPolicy
+exit
+
+==>Usulutan
+
+ip access-list standard 2 
+permit 192.25.40.0 0.0.0.0
+exit
+
+class-map RadioVariedadesMap
+match access-group 2
+exit
+
+policy-map RadioVariedadesPolicy
+class RadioVariedadesMap
+bandwidth 10
+set precedence network
+exit
+
+int gi0/1
+service-policy output RadioVariedadesPolicy
+
+
+==>LaUnion
+ip access-list standard 2 
+permit 172.25.10.0 0.0.0.0
+
+class-map RadioLaFabulosaMap
+match access-group 2
+exit
+
+policy-map RadioLaFabulosaPolicy
+class RadioLaFabulosaMap
+bandwidth 10
+set precedence network
+exit
+
+int gi0/1
+service-policy output RadioLaFabulosaPolicy
+
+
+==>Morazan
+ip access-list standard 2 
+permit 172.25.30.0 0.0.0.0
+
+class-map RadioVenceremosMap
+match access-group 2
+exit
+
+policy-map RadioVenceremosPolicy
+class RadioVenceremosMap
+bandwidth 10
+set precedence network
+exit
+
+int gi0/1
+service-policy output RadioVenceremosPolicy
+exit

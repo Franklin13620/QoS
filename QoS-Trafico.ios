@@ -1,0 +1,30 @@
+==>SanMiguel,Usulutan,LaUnion, Morazan
+
+class-map Trafico
+match protocol ospf
+match protocol icmp
+match protocol ftp
+exit
+
+class-map nivelHTTP
+match protocol http
+exit
+
+class-map nivelC_Remotos
+match protocol ssh
+match protocol telnet
+exit
+
+policy-map QoS
+class Trafico
+set precedence 7
+class nivelC_Remotos
+set precedence 5
+class nivelHTTP
+set precedence 3
+exit
+
+interface gi0/1
+service-policy output QoS
+exit
+do copy run start

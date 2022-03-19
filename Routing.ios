@@ -1,0 +1,336 @@
+==>SanMiguel
+ena
+conf ter
+hostname SanMiguel
+
+int gi0/1
+ip add 10.12.0.1 255.255.255.252
+no shu
+exit
+
+int gi0/0
+ip add 10.12.0.9 255.255.255.252
+no shu
+exit
+
+
+int gi0/2
+no shu
+int gi0/2.2
+encapsulation dot1q 2
+ip add 192.25.20.1 255.255.255.0
+exit
+int gi0/2.3
+encapsulation dot1q 3
+ip add 192.25.30.1 255.255.255.0
+exit
+
+ip dhcp pool POOL-RadioRocola
+network 192.25.20.0 255.255.255.0
+default-router 192.25.20.1
+exit
+ip dhcp pool POOL-RadioPachaguera
+network 192.25.30.0 255.255.255.0
+default-router 192.25.30.1
+exit
+
+router ospf 25
+network 192.25.20.0 0.0.0.255 area 10
+network 192.25.30.0 0.0.0.255 area 10
+network 10.12.0.8 0.0.0.3 area 10
+network 10.12.0.0 0.0.0.3 area 10
+exit
+
+
+==>Usulutan
+ena
+conf ter
+hostname Usulutan
+
+int gi0/0
+ip add 10.12.0.10 255.255.255.252
+no shu
+exit
+
+int gi0/1
+ip add 10.12.0.5 255.255.255.252
+no shu
+exit
+
+int gi0/2
+no shu
+int gi0/2.4
+encapsulation dot1q 4
+ip add 192.25.40.1 255.255.255.0
+exit
+int gi0/2.5
+encapsulation dot1q 5
+ip add 192.25.50.1 255.255.255.0
+exit
+
+ip dhcp pool POOL-RadioVariedades
+network 192.25.40.0 255.255.255.0
+default-router 192.25.40.1
+exit
+ip dhcp pool POOL-RadioCariniosa
+network 192.25.50.0 255.255.255.0
+default-router 192.25.50.1
+exit
+
+router ospf 25
+network 192.25.40.0 0.0.0.255 area 10
+network 192.25.50.0 0.0.0.255 area 10
+network 12.0.8 0.0.0.3 area 10
+network 12.0.4 0.0.0.3 area 10
+exit
+
+
+
+==>LaUnion
+ena
+conf ter
+hostname LaUnion
+
+int gi0/1
+ip add 10.13.0.2 255.255.255.252
+no shu
+exit
+
+int gi0/0
+ip add 10.13.0.9 255.255.255.252
+no shu
+exit
+
+int gi0/2
+no shu
+int gi0/2.2
+encapsulation dot1q 2
+ip add 172.25.10.1 255.255.255.0
+exit
+int gi0/2.3
+encapsulation dot1q 3
+ip add 172.25.20.1 255.255.255.0
+exit
+
+ip dhcp pool POOL-RadioFabulosa
+network 172.25.10.0 255.255.255.0
+default-router 172.25.10.1
+exit
+ip dhcp pool POOL-FrawithzRadio
+network 172.25.20.0 255.255.255.0
+default-router 172.25.20.1
+exit
+
+router ospf 25
+network 172.25.10.0 0.0.0.255 area 20
+network 172.25.20.0 0.0.0.255 area 20
+network 10.13.0.0 0.0.0.3 area 20
+network 10.13.0.8 0.0.0.3 area 20
+exit
+
+
+
+
+
+==>Morazan
+ena
+conf ter
+hostname Morazan
+
+int gi0/0
+ip add 10.13.0.10 255.255.255.252
+no shu
+exit
+
+int gi0/1
+ip add 10.13.0.6 255.255.255.252
+no shu
+exit
+
+int gi0/2
+no shu
+int gi0/2.4
+encapsulation dot1q 4
+ip add 172.25.30.1 255.255.255.0
+exit
+int gi0/2.5
+encapsulation dot1q 5
+ip add 172.25.40.1 255.255.255.0
+exit
+
+ip dhcp pool POOL-RadioVenceremos
+network 172.25.30.0 255.255.255.0
+default-router 172.25.30.1
+exit
+ip dhcp pool POOL-RadioStereo
+network 172.25.40.0 255.255.255.0
+default-router 172.25.40.1
+exit
+
+router ospf 25
+network 172.25.30.0 0.0.0.255 area 20
+network 172.25.40.0 0.0.0.255 area 20
+network 10.13.0.4 0.0.0.3 area 20
+network 10.13.0.8 0.0.0.3 area 20
+exit
+
+
+
+
+==>CORE-1
+ena
+conf ter
+hostname CORE-1
+
+int gi0/2
+ip add 10.12.0.2 255.255.255.252
+no shu
+exit
+
+int gi0/3
+ip add 10.12.0.6 255.255.255.252
+no shu
+exit
+
+iint gi0/0
+ip add 10.67.0.5 255.255.255.252
+no shu
+exit
+
+int gi0/4
+ip add 10.67.0.9 255.255.255.252
+no shu
+exit
+
+int gi0/1 
+ip add 10.67.0.1 255.255.255.252
+no shu
+exit
+
+Router ospf 25
+network 10.12.0.0 0.0.0.3 area 10
+network 10.12.0.4 0.0.0.3 area 10
+network 10.67.0.4 0.0.0.3 area 0
+network 10.67.0.8 0.0.0.3 area 0
+network 10.67.0.0 0.0.0.3 area 0
+
+
+
+
+==>CORE-3
+ena
+conf ter
+hostname CORE-3
+
+int gi0/0
+ip add 10.67.0.6 255.255.255.252
+no shu
+exit
+
+int gi0/2
+ip add 10.115.0.9 255.255.255.252
+no shu
+exit
+
+int gi0/1
+ip add 10.115.0.1 255.255.255.252
+no shu
+exit
+
+Router ospf 25
+network 10.67.0.4 0.0.0.3 area 0
+network 10.115.0.8 0.0.0.3 area 0
+network 10.115.0.0 0.0.0.3 area 0
+
+
+
+
+==>CORE-2
+ena
+conf ter
+hostname CORE-2
+
+int gi0/0
+ip add 10.115.0.2 255.255.255.252
+no shu
+exit
+
+int gi0/4
+ip add 10.115.0.10 255.255.255.252
+no shu
+exit
+
+int gi0/1
+ip add 10.115.0.6 255.255.255.252
+no shu
+exit
+
+int gi0/2
+ip add 10.13.0.1 255.255.255.252
+no shu
+exit
+
+int gi0/3
+ip add 10.13.0.5 255.255.255.252
+no shu
+exit
+
+Router ospf 25
+network 10.115.0.0 0.0.0.3 area 0
+network 10.67.0.8 0.0.0.3 area 0
+network 10.115.0.4 0.0.0.3 area 0
+network 10.13.0.0 0.0.0.3 area 20
+network 10.13.0.4 0.0.0.3 area 20
+
+
+
+==>BORDER
+ena
+conf ter
+hostname BORDER
+
+int gi0/1
+ip add 10.115.0.5 255.255.255.252
+no shu
+exit
+
+int gi0/3
+ip add 10.115.0.10 255.255.255.252
+no shu
+exit
+
+int gi0/0
+ip add 10.67.0.2 255.255.255.252
+no shu
+exit
+
+ip route 0.0.0.0 0.0.0.0 gi0/2
+
+int gi0/0
+ip add 100.100.100.1 255.255.255.252
+no shu
+exit
+
+Router ospf 25
+network 10.67.0.0 0.0.0.3 area 0
+network 10.115.0.8 0.0.0.3 area 0
+network 10.115.0.4 0.0.0.3 area 0
+default-information originate
+exit
+
+==>ISP
+ena 
+conf ter
+hostname ISP
+
+int gi0/0
+ip add 100.100.100.2 255.255.255.252
+no shu
+exit
+
+ip route 0.0.0.0 0.0.0.0 gi0/0
+
+int gi0/1
+ip add 200.200.200.1 255.255.255.0
+no shu
+exit

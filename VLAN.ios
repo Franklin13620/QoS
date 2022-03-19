@@ -1,0 +1,122 @@
+==>SW1
+ena
+conf ter
+hostname SW1
+ip routing 
+
+vlan 2 
+name RadioRocola
+exit
+vlan 3 
+name RadioPachanguera
+exit
+
+int gi0/0
+sw t encapsulation dot1q
+sw m t
+sw t all vl 2,3
+exit
+
+int gi0/1
+sw m acc
+sw acc vl 2
+exit
+
+int gi0/2
+sw m acc
+sw acc vl 3
+exit
+
+
+
+==>Sw2
+ena
+conf ter
+hostname SW2
+ip routing 
+
+vlan 4 
+name RadioVariedades
+exit
+vlan 5 
+name RadioCariniosa
+exit
+
+int gi0/0
+sw t encapsulation dot1q
+sw m t
+sw t all vl 4,5
+exit
+
+int gi0/1
+sw m acc
+sw acc vl 4
+exit
+
+int gi0/2
+sw m acc
+sw acc vl 5
+exit
+
+
+
+
+==>Sw3
+ena
+conf ter
+hostname SW3
+ip routing 
+
+vlan 2
+name RadioLaFabulosa
+exit
+vlan 3 
+name FrawithzRadio
+exit
+
+int gi0/0
+sw t encapsulation dot1q
+sw m t
+sw t all vl 2,3
+exit
+
+int gi0/1
+sw m acc
+sw acc vl 2
+exit
+
+int gi0/2
+sw m acc
+sw acc vl 3
+exit
+
+
+
+==>Sw4
+ena
+conf ter
+hostname SW4
+ip routing 
+
+vlan 4 
+name RadioVenceremos
+exit
+vlan 5 
+name RadioStereo
+exit
+
+int gi0/0
+sw t encapsulation dot1q
+sw m t
+sw t all vl 4,5
+exit
+
+int gi0/1
+sw m acc
+sw acc vl 4
+exit
+
+int gi0/2
+sw m acc
+sw acc vl 5
+exit
